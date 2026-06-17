@@ -8,10 +8,10 @@
   // ---------- Constants ----------
   const STORE_KEY = "jjlt.v1";
   const BELTS = ["White", "Blue", "Purple", "Brown", "Black"];
-  const BELT_COLOR = { White: "#dcdce1", Blue: "#2b78e4", Purple: "#8944c4", Brown: "#7a4a2b", Black: "#1c1c1e" };
-  const BELT_TEXT = { White: "#1c1c1e", Blue: "#fff", Purple: "#fff", Brown: "#fff", Black: "#fff" };
+  const BELT_COLOR = { White: "#e4e4e8", Blue: "#3a86e0", Purple: "#a05cd6", Brown: "#8a5a36", Black: "#2c2c31" };
+  const BELT_TEXT = { White: "#161618", Blue: "#fff", Purple: "#fff", Brown: "#fff", Black: "#fff" };
   const STATUSES = ["Scheduled", "Completed", "Cancelled", "No-show"];
-  const STATUS_COLOR = { Scheduled: "#2b78e4", Completed: "#2e9e54", Cancelled: "#e88b2a", "No-show": "#e0483d" };
+  const STATUS_COLOR = { Scheduled: "#4a90e2", Completed: "#34c76a", Cancelled: "#eb9a3c", "No-show": "#ef5a4f" };
   const METHODS = ["Cash", "Card", "Bank transfer", "Venmo", "PayPal", "Other"];
 
   // ---------- Helpers ----------
@@ -202,10 +202,10 @@
 
     let html = '<div class="content">';
     html += '<div class="section"><div class="stats four">' +
-      tile("Today", today.length, "var(--blue)", "📅") +
-      tile("This week", week, "var(--indigo)", "🗓️") +
-      tile("Active clients", active, "var(--purple)", "🥋") +
-      tile("Revenue (mo.)", money(revenue), "var(--green)", "💵") +
+      tile("Today", today.length, "var(--gold)", "📅") +
+      tile("This week", week, "var(--gold)", "🗓️") +
+      tile("Active clients", active, "var(--gold)", "🥋") +
+      tile("Revenue (mo.)", money(revenue), "var(--gold)", "💵") +
       "</div></div>";
 
     html += '<div class="section"><div class="section-head"><h2>Today\'s Lessons</h2></div>';
@@ -277,9 +277,9 @@
 
     // stats
     html += '<div class="section"><div class="stats three">' +
-      tile("Completed", completedFor(c.id).length, "var(--green)", "✅") +
-      tile("Prepaid left", remaining, remaining < 0 ? "var(--red)" : "var(--blue)", "🎟️") +
-      tile("Balance", money(balance), balance > 0 ? "var(--red)" : "var(--green)", "💲") +
+      tile("Completed", completedFor(c.id).length, "var(--gold)", "✅") +
+      tile("Prepaid left", remaining, remaining < 0 ? "var(--red)" : "var(--gold)", "🎟️") +
+      tile("Balance", money(balance), balance > 0 ? "var(--red)" : "var(--gold)", "💲") +
       "</div></div>";
 
     if (upcoming.length) {
@@ -356,8 +356,8 @@
       return html + "</div>";
     }
     html += '<div class="section"><div class="stats">' +
-      tile("This month", money(monthTotal), "var(--green)", "📅") +
-      tile("All time", money(allTotal), "var(--blue)", "Σ") +
+      tile("This month", money(monthTotal), "var(--gold)", "📅") +
+      tile("All time", money(allTotal), "var(--gold)", "Σ") +
       "</div></div>";
 
     const grouped = group(payments, (p) => { const d = new Date(p.date); return d.getFullYear() + "-" + pad2(d.getMonth() + 1); });
