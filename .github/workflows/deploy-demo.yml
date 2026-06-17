@@ -1,0 +1,48 @@
+name: Deploy lesson-tracker demo
+
+# Publishes the self-contained web demo in static/lesson-tracker/ to the
+# `gh-pages` branch. Enable GitHub Pages once (Settings → Pages → Deploy from a
+# branch → gh-pages → / root) and the site updates automatically after that.
+
+on:
+  push:
+    branches:
+      - claude/jiu-jitsu-lesson-tracker-10qzyj
+      - main
+    paths:
+      - "static/lesson-tracker/**"
+      - ".github/workflows/deploy-demo.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-demo
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish demo to gh-pages branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          SRC="static/lesson-tracker"
+          WORK="$(mktemp -d)"
+          cp -r "$SRC"/. "$WORK"/
+          # Disable Jekyll so files are served as-is.
+          touch "$WORK/.nojekyll"
+          cd "$WORK"
+          git init -q
+          git checkout -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Deploy lesson-tracker demo"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
