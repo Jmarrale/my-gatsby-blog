@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurum Systems — Rollout &amp; Scale Plan</title>
+<meta name="robots" content="noindex">
+<style>
+:root {
+  --paper: #f7f5f0;
+  --ink: #17150f;
+  --ink-soft: #55503f;
+  --hairline: #ddd8cc;
+  --bronze: #8a6d3b;
+  --bronze-soft: #c9b184;
+  --serif: Georgia, "Times New Roman", Times, serif;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-snap-type: y mandatory; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--hairline);
+  padding: 72px 0;
+  position: relative;
+}
+.wrap { width: min(1060px, 90vw); margin: 0 auto; }
+.kicker {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 26px;
+}
+.kicker::after {
+  content: "";
+  display: block;
+  width: 40px;
+  border-bottom: 1px solid var(--bronze);
+  margin-top: 12px;
+}
+h1 { font-weight: 400; font-size: clamp(40px, 5.6vw, 66px); line-height: 1.1; letter-spacing: -0.01em; }
+h2 { font-weight: 400; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.15; margin-bottom: 34px; max-width: 24em; text-wrap: balance; }
+h3 { font-weight: 400; font-size: 21px; margin-bottom: 10px; }
+p.lede { font-size: 20px; color: var(--ink-soft); max-width: 34em; }
+.pagenum {
+  position: absolute;
+  bottom: 28px; right: 5vw;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+}
+.footmark {
+  position: absolute;
+  bottom: 28px; left: 5vw;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.footmark b { color: var(--ink); font-weight: 400; }
+
+/* shared blocks */
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 44px; align-items: start; }
+.rule-top { border-top: 1px solid var(--ink); padding-top: 22px; }
+.num { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; color: var(--bronze); margin-bottom: 12px; }
+.muted { color: var(--ink-soft); }
+.small { font-size: 15.5px; }
+.stat .value { font-size: clamp(34px, 3.6vw, 50px); line-height: 1; font-variant-numeric: tabular-nums; }
+.stat .label { font-family: var(--sans); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 14px; }
+.stat p { font-size: 15px; color: var(--ink-soft); margin-top: 8px; }
+
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th {
+  font-family: var(--sans); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-soft); font-weight: 400; text-align: left; padding: 0 14px 12px 0;
+  border-bottom: 1px solid var(--ink);
+}
+td { padding: 13px 14px 13px 0; border-bottom: 1px solid var(--hairline); font-size: 16.5px; }
+td.n, th.n { text-align: right; padding-right: 0; }
+tr.total td { border-bottom: none; border-top: 1px solid var(--ink); color: var(--ink); }
+tr.total td:first-child { font-family: var(--sans); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+ul.tick { list-style: none; }
+ul.tick li { padding: 11px 0 11px 26px; border-bottom: 1px solid var(--hairline); font-size: 16.5px; position: relative; }
+ul.tick li::before { content: "—"; position: absolute; left: 0; color: var(--bronze); }
+ul.tick li b { font-weight: 400; }
+ul.tick li span { color: var(--ink-soft); }
+
+figure { margin: 0; }
+figure svg { width: 100%; height: auto; display: block; }
+figcaption { font-family: var(--sans); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-top: 14px; }
+
+.axis-label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.08em; fill: var(--ink-soft); }
+.bar-value { font-family: var(--sans); font-size: 12.5px; fill: var(--ink); }
+.bar-note { font-family: var(--sans); font-size: 10.5px; fill: var(--ink-soft); }
+
+/* title slide */
+.title-slide .wordmark { font-size: 19px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 90px; }
+.title-slide .wordmark span { color: var(--bronze); }
+.title-slide .sub { margin-top: 36px; font-size: 21px; color: var(--ink-soft); max-width: 30em; }
+.title-slide .meta { margin-top: 70px; font-family: var(--sans); font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* nav hint */
+.hint {
+  position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%);
+  font-family: var(--sans); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-soft); opacity: 0.8;
+}
+
+@media (max-width: 820px) {
+  .cols2, .cols3 { grid-template-columns: 1fr; gap: 34px; }
+  .slide { padding: 56px 0 72px; min-height: auto; }
+  html { scroll-snap-type: none; }
+  .hint { display: none; }
+  h2 { margin-bottom: 24px; }
+}
+@media print {
+  html { scroll-snap-type: none; }
+  .slide { min-height: auto; page-break-after: always; border-bottom: none; padding: 40px 0; }
+  .hint { display: none; }
+  body { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1 · Title -->
+<section class="slide title-slide" id="s1">
+  <div class="wrap">
+    <p class="wordmark">Aurum<span>&nbsp;Systems</span></p>
+    <h1>Rollout &amp; scale.<br>Zero to $10M in twelve months.</h1>
+    <p class="sub">Security and residential technology for the builders of El Dorado Hills — designed by one authority, delivered through licensed subcontractors.</p>
+    <p class="meta">El Dorado Hills, California &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; 2026</p>
+  </div>
+  <p class="pagenum">1 / 10</p>
+</section>
+
+<!-- 2 · Opportunity -->
+<section class="slide" id="s2">
+  <div class="wrap">
+    <p class="kicker">The Opportunity</p>
+    <h2>A luxury corridor with no independent design authority.</h2>
+    <div class="cols3">
+      <div class="stat rule-top">
+        <p class="value">$1.75M<sup style="font-size:.5em;color:var(--bronze)">+</sup></p>
+        <p class="label">The homes we serve</p>
+        <p>El Dorado Hills, Serrano, Folsom and the foothills sustain steady custom and semi-custom volume at this tier.</p>
+      </div>
+      <div class="stat rule-top">
+        <p class="value">3–5%</p>
+        <p class="label">Of build value</p>
+        <p>The technology &amp; security allocation buyers at this tier expect — $90K to $320K+ per residence.</p>
+      </div>
+      <div class="stat rule-top">
+        <p class="value">0</p>
+        <p class="label">Independent authorities</p>
+        <p>Today builders juggle dealer-driven installers, each selling their own line. Nobody owns the design.</p>
+      </div>
+    </div>
+    <p class="lede" style="margin-top:52px;">The gap: builders want one accountable expert from plan stage to closing. Dealers can&rsquo;t be neutral. Aurum can.</p>
+  </div>
+  <p class="footmark"><b>Aurum</b> Systems</p>
+  <p class="pagenum">2 / 10</p>
+</section>
+
+<!-- 3 · Model -->
+<section class="slide" id="s3">
+  <div class="wrap">
+    <p class="kicker">The Model</p>
+    <h2>One design authority. Three ways we're paid.</h2>
+    <div class="cols3">
+      <div class="rule-top">
+        <p class="num">01</p>
+        <h3>Design &amp; consulting fees</h3>
+        <p class="small muted">Plans, specifications, and bid packages, produced personally. Roughly 10% of system value; ~90% gross margin. Opens every relationship.</p>
+      </div>
+      <div class="rule-top">
+        <p class="num">02</p>
+        <h3>Prime systems contracts</h3>
+        <p class="small muted">Aurum holds the contract; vetted, licensed subcontractors install under our supervision to our drawings. The engine of the $10M plan — ~30–35% blended gross margin.</p>
+      </div>
+      <div class="rule-top">
+        <p class="num">03</p>
+        <h3>Care plans</h3>
+        <p class="small muted">Monitoring coordination, service, and upgrades after closing. $200–$500 per month per estate. Small in year one; the annuity that compounds after it.</p>
+      </div>
+    </div>
+    <p class="lede" style="margin-top:52px;">We hold no dealer line and sell no hardware. The specification serves the home — which is exactly why builders can hand us the whole scope.</p>
+  </div>
+  <p class="footmark"><b>Aurum</b> Systems</p>
+  <p class="pagenum">3 / 10</p>
+</section>
+
+<!-- 4 · Unit economics -->
+<section class="slide" id="s4">
+  <div class="wrap">
+    <p class="kicker">Unit Economics</p>
+    <h2>What one home is worth.</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Tier</th><th>Home value</th><th class="n">System contract</th><th class="n">Design fee</th><th class="n">Gross profit / home</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>The Foothill</td><td class="muted">$1.75M – $2.5M</td><td class="n">$90K – $160K</td><td class="n">$10K – $15K</td><td class="n">$38K – $55K</td></tr>
+        <tr><td>The Estate</td><td class="muted">$2.5M – $4M</td><td class="n">$160K – $320K</td><td class="n">$16K – $30K</td><td class="n">$60K – $110K</td></tr>
+        <tr><td>The Legacy</td><td class="muted">$4M+</td><td class="n">$320K+</td><td class="n">$30K+</td><td class="n">$115K+</td></tr>
+        <tr class="total"><td>Blended planning unit</td><td></td><td class="n">$150K</td><td class="n">$15K</td><td class="n">~$50K&nbsp;(33%)</td></tr>
+      </tbody>
+    </table>
+    <p class="small muted" style="margin-top:34px; max-width: 44em;">Design fee is included in the contract value. Subcontract labor and equipment run ~65–70% of contract; Aurum carries no inventory, no trucks, and no installation payroll. Gross profit funds a lean salaried team — the design library does the scaling.</p>
+  </div>
+  <p class="footmark"><b>Aurum</b> Systems</p>
+  <p class="pagenum">4 / 10</p>
+</section>
+
+<!-- 5 · The math -->
+<section class="slide" id="s5">
+  <div class="wrap">
+    <p class="kicker">The Math to $10M</p>
+    <h2>Sixty-two homes. Four builder programs. One year.</h2>
+    <div class="cols2">
+      <figure aria-label="Revenue mix: builder programs $5.8M, custom estates $3.5M, design-only fees $0.5M, care plans $0.2M">
+        <svg viewBox="0 0 520 300" role="img">
+          <!-- horizontal bars, single hue: identity carried by labels -->
+          <g font-family="Helvetica, Arial, sans-serif">
+            <text class="axis-label" x="0" y="24">Builder programs — 48 semi-custom homes</text>
+            <rect x="0" y="34" width="435" height="26" rx="4" fill="#8a6d3b"/>
+            <text class="bar-value" x="445" y="52">$5.8M</text>
+
+            <text class="axis-label" x="0" y="96">Custom estates — 14 homes</text>
+            <rect x="0" y="106" width="262" height="26" rx="4" fill="#8a6d3b"/>
+            <text class="bar-value" x="272" y="124">$3.5M</text>
+
+            <text class="axis-label" x="0" y="168">Design-only engagements — 20 plan sets</text>
+            <rect x="0" y="178" width="38" height="26" rx="4" fill="#8a6d3b"/>
+            <text class="bar-value" x="48" y="196">$0.5M</text>
+
+            <text class="axis-label" x="0" y="240">Care plans — recurring</text>
+            <rect x="0" y="250" width="15" height="26" rx="4" fill="#8a6d3b"/>
+            <text class="bar-value" x="25" y="268">$0.2M</text>
+          </g>
+        </svg>
+        <figcaption>Year-one revenue mix — $10.0M total</figcaption>
+      </figure>
+      <div>
+        <ul class="tick">
+          <li><b>4 builder programs</b> <span>— 12 homes each at ~$120K average system contract. One program = one relationship signed per quarter.</span></li>
+          <li><b>14 custom estates</b> <span>— at ~$250K average. Sourced through architects, Serrano custom lots, and the model-home showcase.</span></li>
+          <li><b>20 design-only plan sets</b> <span>— $25K average. Every one is a foot in the door for the install contract.</span></li>
+          <li><b>Care plans</b> <span>— begin at first closings; ~40 active by year-end.</span></li>
+        </ul>
+        <p class="small muted" style="margin-top:26px;">At ~$50K blended gross per installed home, 62 homes generate ~$3.2M gross profit against a lean cost base.</p>
+      </div>
+    </div>
+  </div>
+  <p class="footmark"><b>Aurum</b> Systems</p>
+  <p class="pagenum">5 / 10</p>
+</section>
+
+<!-- 6 · Go-to-market -->
+<section class="slide" id="s6">
+  <div class="wrap">
+    <p class="kicker">Go-To-Market</p>
+    <h2>Win the builder, and the buyer comes with the house.</h2>
+    <div class="cols2">
+      <div>
+        <ul class="tick">
+          <li><b>Builder partnerships</b> <span>— the primary channel. Target: 25 builder &amp; GC meetings in 90 days; sign one program per quarter.</span></li>
+          <li><b>The wedge</b> <span>— a complimentary plan-stage allocation review. Costs us hours; shows the builder exactly what their spec is missing.</span></li>
+          <li><b>Architects &amp; designers</b> <span>— referral fees on design engagements; they keep design authority intact, which dealers threaten.</span></li>
+          <li><b>Model-home showcase</b> <span>— one flagship install at cost in a high-traffic community. The demo that sells the next forty homes.</span></li>
+        </ul>
+      </div>
+      <div>
+        <ul class="tick">
+          <li><b>Territory</b> <span>— El Dorado Hills first: Serrano, Blackstone, Kalithea, custom lots. Then Folsom, Granite Bay, and the foothills.</span></li>
+          <li><b>Positioning</b> <span>— the independent authority: no dealer line, no hardware markup games, one accountable signature on the whole system.</span></li>
+          <li><b>Proof</b> <span>— aurumsystems site live with intake forms; every referral lands on a two-business-day response commitment.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="footmark"><b>Aurum</b> Systems</p>
+  <p class="pagenum">6 / 10</p>
+</section>
+
+<!-- 7 · Ramp -->
+<section class="slide" id="s7">
+  <div class="wrap">
+    <p class="kicker">The Ramp</p>
+    <h2>Four quarters, compounding.</h2>
+    <div class="cols2">
+      <figure aria-label="Quarterly revenue: Q1 $0.6M, Q2 $1.9M, Q3 $3.2M, Q4 $4.3M">
+        <svg viewBox="0 0 520 320" role="img">
+          <g font-family="Helvetica, Arial, sans-serif">
+            <line x1="0" y1="270" x2="520" y2="270" stroke="#ddd8cc"/>
+            <text class="bar-value" x="30" y="228">$0.6M</text>
+            <rect x="16" y="238" width="92" height="32" rx="4" fill="#8a6d3b"/>
+            <text class="axis-label" x="46" y="292">Q1</text>
+            <text class="bar-note" x="8" y="312">4 homes · program #1 signed</text>
+
+            <text class="bar-value" x="162" y="160">$1.9M</text>
+            <rect x="148" y="170" width="92" height="100" rx="4" fill="#8a6d3b"/>
+            <text class="axis-label" x="178" y="292">Q2</text>
+            <text class="bar-note" x="140" y="312">13 homes · PM hired</text>
+
+            <text class="bar-value" x="294" y="92">$3.2M</text>
+            <rect x="280" y="102" width="92" height="168" rx="4" fill="#8a6d3b"/>
+            <text class="axis-label" x="310" y="292">Q3</text>
+            <text class="bar-note" x="272" y="312">20 homes · programs #3–4</text>
+
+            <text class="bar-value" x="426" y="34">$4.3M</text>
+            <rect x="412" y="44" width="92" height="226" rx="4" fill="#8a6d3b"/>
+            <text class="axis-label" x="442" y="292">Q4</text>
+            <text class="bar-note" x="404" y="312">25 homes · 2nd PM + drafter</text>
+          </g>
+        </svg>
+        <figcaption>Recognized revenue by quarter — $10.0M cumulative</figcaption>
+      </figure>
+      <div>
+        <ul class="tick">
+          <li><b>Q1 — Foundation.</b> <span>Licensing filed, sub network signed, model home underway, first two estates and first builder program.</span></li>
+          <li><b>Q2 — Proof.</b> <span>Model home opens. First program homes hit rough-in; first closings activate care plans.</span></li>
+          <li><b>Q3 — Repetition.</b> <span>Playbook-driven delivery: two more programs signed, ~8 concurrent installs per project manager.</span></li>
+          <li><b>Q4 — Scale.</b> <span>Four programs running plus the estate pipeline; exit at a $17M+ annualized run rate.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="footmark"><b>Aurum</b> Systems</p>
+  <p class="pagenum">7 / 10</p>
+</section>
+
+<!-- 8 · Operating plan -->
+<section class="slide" id="s8">
+  <div class="wrap">
+    <p class="kicker">Operating Plan</p>
+    <h2>How one expert scales: design once, deliver by playbook.</h2>
+    <div class="cols2">
+      <div>
+        <ul class="tick">
+          <li><b>The design library</b> <span>— three tiered reference designs (Foothill, Estate, Legacy) adapted per plan set. Design hours per home fall every quarter.</span></li>
+          <li><b>The sub bench</b> <span>— two vetted, licensed subcontractors per trade: security, network/AV, electrical. Scorecards, retention on draws, our commissioning checklist.</span></li>
+          <li><b>Quality gate</b> <span>— Jon signs every design and every commissioning. That signature is the brand.</span></li>
+        </ul>
+      </div>
+      <div>
+        <ul class="tick">
+          <li><b>Team of five by year-end</b> <span>— project manager (Q1), operations admin (Q2), second PM (Q3), designer-drafter (Q4). No installation payroll, ever.</span></li>
+          <li><b>Cash discipline</b> <span>— 30% deposit, progress billing at rough-in and trim, subs paid after owner draws, distributor terms on equipment. The model funds its own growth.</span></li>
+          <li><b>Working capital</b> <span>— a ~$150K line covers timing gaps in Q1–Q2 before deposits stack.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="footmark"><b>Aurum</b> Systems</p>
+  <p class="pagenum">8 / 10</p>
+</section>
+
+<!-- 9 · Risks -->
+<section class="slide" id="s9">
+  <div class="wrap">
+    <p class="kicker">Risks &amp; Gates</p>
+    <h2>What could break it — and the answer to each.</h2>
+    <table>
+      <thead>
+        <tr><th style="width:30%">Risk</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Licensing gate</td><td class="muted small">Prime low-voltage/alarm contracts in California require CSLB licensure (C-7 low voltage; alarm-company registration for monitored intrusion). File in week one; until issued, contract through a licensed partner-of-record or run design-fee-only engagements. This is gate #1 and it is scheduled, not hoped for.</td></tr>
+        <tr><td>Builder concentration</td><td class="muted small">No single builder above ~40% of pipeline; four programs by design, plus the estate channel.</td></tr>
+        <tr><td>Housing cycle</td><td class="muted small">Design fees and retrofit/estate work carry a downturn; allocation guidance scales with build value rather than fixed packages.</td></tr>
+        <tr><td>Sub capacity &amp; quality</td><td class="muted small">Two subs per trade, scorecards, retention held on draws, and our own commissioning standard between them and the buyer.</td></tr>
+        <tr><td>Cash timing</td><td class="muted small">Deposits and progress billing keep the cycle near-neutral; the $150K line absorbs Q1–Q2 gaps.</td></tr>
+        <tr><td>Key-person load</td><td class="muted small">The design library and drafter hire convert Jon&rsquo;s expertise into repeatable documents; PMs own the field.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="footmark"><b>Aurum</b> Systems</p>
+  <p class="pagenum">9 / 10</p>
+</section>
+
+<!-- 10 · Next 90 days -->
+<section class="slide" id="s10">
+  <div class="wrap">
+    <p class="kicker">The Next 90 Days</p>
+    <h2>Launch is a checklist, not a leap.</h2>
+    <div class="cols2">
+      <div>
+        <ul class="tick">
+          <li><b>Weeks 1–2</b> <span>— entity, insurance, bank line; CSLB &amp; alarm registration filed.</span></li>
+          <li><b>Weeks 2–6</b> <span>— sub bench signed: two per trade, rate cards and standards agreed.</span></li>
+          <li><b>Weeks 3–10</b> <span>— 25 builder &amp; architect meetings across El Dorado Hills and Folsom.</span></li>
+        </ul>
+      </div>
+      <div>
+        <ul class="tick">
+          <li><b>Weeks 6–12</b> <span>— model-home showcase under construction; first two estate designs delivered.</span></li>
+          <li><b>Day 90</b> <span>— two prime contracts signed, program #1 in negotiation, pipeline &ge; $2.5M.</span></li>
+          <li><b>Already done</b> <span>— brand, site, and intake live: aurumsystems — jmarrale.github.io/my-gatsby-blog/aurum</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="lede" style="margin-top:56px;">Ten million dollars is sixty-two homes in a market already building them. The design authority seat is empty. We take it this quarter.</p>
+  </div>
+  <p class="footmark"><b>Aurum</b> Systems</p>
+  <p class="pagenum">10 / 10</p>
+</section>
+
+<p class="hint">Scroll or use arrow keys · Print for PDF</p>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  function current() {
+    var mid = window.scrollY + window.innerHeight / 2;
+    for (var i = 0; i < slides.length; i++) {
+      var r = slides[i];
+      if (r.offsetTop <= mid && mid < r.offsetTop + r.offsetHeight) return i;
+    }
+    return 0;
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
+      e.preventDefault();
+      var i = Math.min(current() + 1, slides.length - 1);
+      slides[i].scrollIntoView({ behavior: "smooth" });
+    } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+      e.preventDefault();
+      var i = Math.max(current() - 1, 0);
+      slides[i].scrollIntoView({ behavior: "smooth" });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

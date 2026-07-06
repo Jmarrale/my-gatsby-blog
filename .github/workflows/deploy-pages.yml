@@ -22,7 +22,7 @@ jobs:
       - name: Stage static site
         run: |
           mkdir -p _site/assets
-          cp index.html security.html technology.html thanks.html _site/
+          cp index.html security.html technology.html thanks.html deck.html _site/
           cp assets/styles.css _site/assets/
       # Publishes to the aurum/ folder of the gh-pages branch (the branch
       # this repo's Pages serves from). keep_files preserves the other
