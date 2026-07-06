@@ -236,6 +236,202 @@ h2 {
   color: var(--ink-soft);
 }
 
+/* market stats */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  margin-top: 8px;
+}
+
+.stat {
+  border-top: 1px solid var(--ink);
+  padding-top: 26px;
+}
+
+.stat .value {
+  font-family: var(--serif);
+  font-size: clamp(40px, 4.6vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat .value sup {
+  font-size: 0.45em;
+  top: -0.85em;
+  color: var(--bronze);
+}
+
+.stat .label {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: 18px;
+}
+
+.stat p.expl {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+}
+
+.pull {
+  margin-top: 84px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 60px;
+}
+
+.pull p {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.4;
+  max-width: 26em;
+}
+
+.pull p em {
+  font-style: italic;
+  color: var(--bronze);
+}
+
+/* layered-protection diagram */
+
+.diagram-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.diagram-cols figure { margin: 0; }
+
+.diagram-cols svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.diagram-cols .ring { fill: none; stroke: var(--ink); stroke-width: 1; opacity: 0.85; }
+.diagram-cols .ring.core { fill: var(--bronze); stroke: none; opacity: 1; }
+.diagram-cols .tick { stroke: var(--bronze); stroke-width: 1; }
+.diagram-cols .ringlabel {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: var(--ink-soft);
+}
+.diagram-cols .ringlabel.strong { fill: var(--ink); }
+
+.layers-copy h3 {
+  font-weight: 400;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+.layers-copy p { color: var(--ink-soft); }
+
+.layers-copy ol {
+  list-style: none;
+  counter-reset: layer;
+  margin-top: 30px;
+  border-top: 1px solid var(--hairline);
+}
+
+.layers-copy ol li {
+  counter-increment: layer;
+  border-bottom: 1px solid var(--hairline);
+  padding: 14px 0;
+  font-size: 17px;
+  display: flex;
+  gap: 20px;
+  align-items: baseline;
+}
+
+.layers-copy ol li::before {
+  content: counter(layer, decimal-leading-zero);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--bronze);
+  flex: none;
+}
+
+.layers-copy ol li span { color: var(--ink-soft); font-size: 16px; }
+
+/* allocation guide */
+
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  margin-top: 64px;
+}
+
+.tier {
+  border-top: 1px solid var(--ink);
+  padding-top: 26px;
+}
+
+.tier .range {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 14px;
+}
+
+.tier h3 {
+  font-weight: 400;
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.tier p.alloc {
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.tier p.alloc strong { font-weight: 400; }
+
+.tier .bar {
+  height: 3px;
+  background: var(--hairline);
+  margin: 22px 0 24px;
+  position: relative;
+}
+
+.tier .bar i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--bronze);
+  display: block;
+}
+
+.tier ul {
+  list-style: none;
+}
+
+.tier ul li {
+  font-size: 16px;
+  color: var(--ink-soft);
+  padding: 9px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.tiers-note {
+  margin-top: 48px;
+  font-size: 15px;
+  color: var(--ink-soft);
+  max-width: 40em;
+}
+
 /* principle / about */
 
 .principle p.big {
@@ -470,6 +666,9 @@ input:focus, select:focus, textarea:focus {
   .cols, .grid, .checks { grid-template-columns: 1fr; }
   .cols { gap: 56px; }
   .steps { grid-template-columns: 1fr 1fr; }
+  .stats, .tiers { grid-template-columns: 1fr; gap: 44px; }
+  .diagram-cols { grid-template-columns: 1fr; gap: 56px; }
+  .diagram-cols figure { max-width: 420px; margin: 0 auto; }
   nav.primary { gap: 20px; }
   nav.primary a.hide-sm { display: none; }
   .btn + .btn { margin-left: 0; margin-top: 12px; }
