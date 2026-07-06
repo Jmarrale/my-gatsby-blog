@@ -8,9 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
@@ -19,9 +17,6 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - name: Stage static site
@@ -29,12 +24,14 @@ jobs:
           mkdir -p _site/assets
           cp index.html security.html technology.html thanks.html _site/
           cp assets/styles.css _site/assets/
-      - uses: actions/configure-pages@v5
+      # Publishes to the aurum/ folder of the gh-pages branch (the branch
+      # this repo's Pages serves from). keep_files preserves the other
+      # demos already hosted at the branch root.
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          enablement: true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _site
+          publish_branch: gh-pages
+          destination_dir: aurum
+          keep_files: true

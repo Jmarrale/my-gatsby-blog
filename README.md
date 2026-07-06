@@ -10,7 +10,7 @@ consultancy for builders in El Dorado Hills, California. No build step required.
 - `assets/styles.css` — all styling
 
 **Hosting:** `.github/workflows/deploy-pages.yml` deploys the site to GitHub
-Pages on every push (https://jmarrale.github.io/my-gatsby-blog/).
+Pages on every push (https://jmarrale.github.io/my-gatsby-blog/aurum/).
 
 **Forms:** wired to [FormSubmit](https://formsubmit.co) — submissions are
 emailed directly, no server needed. The first submission triggers a one-time
