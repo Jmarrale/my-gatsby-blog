@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IT &amp; Smart Home Intake — Aurum Systems</title>
+  <meta name="description" content="Project intake for residential IT, networking, and smart home design. For builders in El Dorado Hills and the Sierra foothills.">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">Aurum<span>&nbsp;Systems</span></a>
+    <nav class="primary">
+      <a href="index.html#disciplines" class="hide-sm">Disciplines</a>
+      <a href="index.html#process" class="hide-sm">Process</a>
+      <a href="security.html">Home Security</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="form-hero">
+  <div class="wrap">
+    <p class="kicker">Intake — IT &amp; Smart Home</p>
+    <h1>Tell us about the project.</h1>
+    <p class="lede">A few minutes here gives us what we need to prepare for a first conversation. Nothing is binding, and nothing is shared. We respond within two business days.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <form class="intake" name="technology-intake" method="POST" action="thanks.html" data-netlify="true" netlify-honeypot="company-website">
+    <input type="hidden" name="form-name" value="technology-intake">
+    <p class="hidden"><label>Leave this field empty: <input name="company-website"></label></p>
+
+    <fieldset>
+      <legend>Contact</legend>
+      <div class="grid">
+        <div class="field">
+          <label for="t-company">Company / Builder</label>
+          <input type="text" id="t-company" name="company" required>
+        </div>
+        <div class="field">
+          <label for="t-name">Contact Name</label>
+          <input type="text" id="t-name" name="contact_name" required>
+        </div>
+        <div class="field">
+          <label for="t-email">Email</label>
+          <input type="email" id="t-email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="t-phone">Phone</label>
+          <input type="tel" id="t-phone" name="phone">
+        </div>
+        <div class="field">
+          <label for="t-role">Your Role</label>
+          <select id="t-role" name="role">
+            <option value="">Select…</option>
+            <option>Builder / Developer</option>
+            <option>General Contractor</option>
+            <option>Architect / Designer</option>
+            <option>Owner&rsquo;s Representative</option>
+            <option>Homeowner</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Project</legend>
+      <div class="grid">
+        <div class="field">
+          <label for="t-project">Project / Community Name</label>
+          <input type="text" id="t-project" name="project_name" placeholder="e.g. Serrano, Blackstone, custom lot">
+        </div>
+        <div class="field">
+          <label for="t-location">Address or Lot / Location</label>
+          <input type="text" id="t-location" name="location" placeholder="El Dorado Hills, CA">
+        </div>
+        <div class="field">
+          <label for="t-type">Project Type</label>
+          <select id="t-type" name="project_type" required>
+            <option value="">Select…</option>
+            <option>Single custom home</option>
+            <option>Spec home</option>
+            <option>Semi-custom phase (multiple homes)</option>
+            <option>Production release (multiple homes)</option>
+            <option>Retrofit / existing home</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="t-count">Number of Residences</label>
+          <input type="text" id="t-count" name="residence_count" placeholder="1">
+        </div>
+        <div class="field">
+          <label for="t-sqft">Approx. Square Footage <span class="opt">(per residence)</span></label>
+          <input type="text" id="t-sqft" name="square_footage" placeholder="e.g. 4,500">
+        </div>
+        <div class="field">
+          <label for="t-phase">Construction Phase</label>
+          <select id="t-phase" name="construction_phase" required>
+            <option value="">Select…</option>
+            <option>Pre-design / land</option>
+            <option>In design / plans in progress</option>
+            <option>Permitted — pre-rough-in</option>
+            <option>Framed / rough-in underway</option>
+            <option>Finish stage</option>
+            <option>Complete — retrofit</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="t-roughin">Target Rough-In Date <span class="opt">(if known)</span></label>
+          <input type="date" id="t-roughin" name="rough_in_date">
+        </div>
+        <div class="field">
+          <label for="t-plans">Plans Available?</label>
+          <select id="t-plans" name="plans_available">
+            <option value="">Select…</option>
+            <option>Yes — can share now</option>
+            <option>In progress</option>
+            <option>Not yet</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Scope of Interest</legend>
+      <div class="checks">
+        <label><input type="checkbox" name="scope" value="Structured wiring and rack design"> Structured wiring &amp; rack design</label>
+        <label><input type="checkbox" name="scope" value="Enterprise network and whole-home Wi-Fi"> Enterprise network &amp; whole-home Wi-Fi</label>
+        <label><input type="checkbox" name="scope" value="Lighting control"> Lighting control</label>
+        <label><input type="checkbox" name="scope" value="Motorized shades"> Motorized shades</label>
+        <label><input type="checkbox" name="scope" value="Distributed audio and video"> Distributed audio &amp; video</label>
+        <label><input type="checkbox" name="scope" value="Home theater or media room"> Home theater / media room</label>
+        <label><input type="checkbox" name="scope" value="Whole-home control platform"> Whole-home control platform</label>
+        <label><input type="checkbox" name="scope" value="Climate and HVAC integration"> Climate &amp; HVAC integration</label>
+        <label><input type="checkbox" name="scope" value="Energy, solar and battery integration"> Energy, solar &amp; battery integration</label>
+        <label><input type="checkbox" name="scope" value="ISP and connectivity planning"> ISP &amp; connectivity planning</label>
+        <label><input type="checkbox" name="scope" value="Outdoor entertainment and landscape AV"> Outdoor entertainment &amp; landscape AV</label>
+        <label><input type="checkbox" name="scope" value="Not sure - advise me"> Not sure — advise me</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Preferences, Budget &amp; Notes</legend>
+      <div class="grid">
+        <div class="field">
+          <label for="t-platform">Control Platform Preference</label>
+          <select id="t-platform" name="platform_preference">
+            <option value="">Select…</option>
+            <option>No preference — recommend one</option>
+            <option>Control4</option>
+            <option>Crestron</option>
+            <option>Savant</option>
+            <option>Lutron</option>
+            <option>Other / mixed</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="t-budget">Technology Budget <span class="opt">(per residence)</span></label>
+          <select id="t-budget" name="budget">
+            <option value="">Select…</option>
+            <option>Under $50,000</option>
+            <option>$50,000 – $150,000</option>
+            <option>$150,000 – $350,000</option>
+            <option>$350,000+</option>
+            <option>To be determined with consultant</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="t-existing">Existing AV / Low-Voltage Subcontractor?</label>
+          <select id="t-existing" name="existing_sub">
+            <option value="">Select…</option>
+            <option>No — need full placement</option>
+            <option>Yes — need design &amp; oversight only</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="t-security">Also need security design?</label>
+          <select id="t-security" name="also_security">
+            <option value="">Select…</option>
+            <option>Yes — combine with security intake</option>
+            <option>No</option>
+            <option>Maybe — let&rsquo;s discuss</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="t-notes">Anything else we should know? <span class="opt">(optional)</span></label>
+          <textarea id="t-notes" name="notes" placeholder="Buyer expectations, model home plans, special rooms, site conditions…"></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button class="btn" type="submit">Submit Intake</button>
+      <p class="note">Your submission is confidential and creates no obligation. We reply within two business days.</p>
+    </div>
+  </form>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p>&copy; 2026 Aurum Systems</p>
+    <p>El Dorado Hills, California</p>
+  </div>
+</footer>
+
+</body>
+</html>

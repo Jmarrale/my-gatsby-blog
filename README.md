@@ -1,3 +1,25 @@
+# Aurum Systems — consulting site
+
+A static site for **Aurum Systems**, an independent security & smart home design
+consultancy for builders in El Dorado Hills, California. No build step required.
+
+- `index.html` — homepage
+- `security.html` — home security project intake form
+- `technology.html` — IT & smart home project intake form
+- `thanks.html` — form confirmation page
+- `assets/styles.css` — all styling
+
+**Forms:** wired for [Netlify Forms](https://docs.netlify.com/forms/setup/) —
+deploy the repo to Netlify and submissions appear in the dashboard (enable email
+notifications there), with a honeypot field for spam. On any other host, point
+each `<form action>` at a service like Formspree instead.
+
+**Preview locally:** open `index.html` in a browser, or `npx serve .`
+
+The original Gatsby starter files remain below/alongside and are unused by this site.
+
+---
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.com">
