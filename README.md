@@ -9,10 +9,14 @@ consultancy for builders in El Dorado Hills, California. No build step required.
 - `thanks.html` — form confirmation page
 - `assets/styles.css` — all styling
 
-**Forms:** wired for [Netlify Forms](https://docs.netlify.com/forms/setup/) —
-deploy the repo to Netlify and submissions appear in the dashboard (enable email
-notifications there), with a honeypot field for spam. On any other host, point
-each `<form action>` at a service like Formspree instead.
+**Hosting:** `.github/workflows/deploy-pages.yml` deploys the site to GitHub
+Pages on every push (https://jmarrale.github.io/my-gatsby-blog/).
+
+**Forms:** wired to [FormSubmit](https://formsubmit.co) — submissions are
+emailed directly, no server needed. The first submission triggers a one-time
+activation email; after activating, you can replace the email address in each
+`<form action>` with the random alias FormSubmit gives you to keep the address
+out of the page source. A honeypot field (`_honey`) filters spam.
 
 **Preview locally:** open `index.html` in a browser, or `npx serve .`
 

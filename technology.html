@@ -30,9 +30,12 @@
 </section>
 
 <div class="wrap">
-  <form class="intake" name="technology-intake" method="POST" action="thanks.html" data-netlify="true" netlify-honeypot="company-website">
-    <input type="hidden" name="form-name" value="technology-intake">
-    <p class="hidden"><label>Leave this field empty: <input name="company-website"></label></p>
+  <form class="intake" name="technology-intake" method="POST" action="https://formsubmit.co/jonathanmarrale@gmail.com">
+    <input type="hidden" name="_subject" value="Aurum Systems — IT &amp; Smart Home Intake">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="">
+    <p class="hidden"><label>Leave this field empty: <input name="_honey"></label></p>
 
     <fieldset>
       <legend>Contact</legend>
@@ -207,6 +210,10 @@
     <p>El Dorado Hills, California</p>
   </div>
 </footer>
+
+<script>
+  document.querySelector('input[name="_next"]').value = new URL("thanks.html", location.href).href;
+</script>
 
 </body>
 </html>
