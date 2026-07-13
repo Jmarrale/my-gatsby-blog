@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Reference entitlements for enabling iCloud / CloudKit sync.
+
+  This file is NOT wired into the build by default so the app runs in the
+  Simulator with no configuration. Prefer enabling iCloud through Xcode's
+  "Signing & Capabilities" tab (it generates the correct entitlements and
+  registers the container under your Apple Developer account). Use this only
+  as a manual reference, and update the container identifier to match yours.
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.icloud-container-identifiers</key>
+	<array>
+		<string>iCloud.com.example.JiuJitsuLessonTracker</string>
+	</array>
+	<key>com.apple.developer.icloud-services</key>
+	<array>
+		<string>CloudKit</string>
+	</array>
+	<key>aps-environment</key>
+	<string>development</string>
+</dict>
+</plist>

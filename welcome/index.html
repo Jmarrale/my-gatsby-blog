@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f1ec" />
+  <meta name="description" content="Your private lesson studio app — everything that was made, and a roadmap to learn it." />
+  <title>Welcome, Will — Your Studio App</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232E2A25'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23B08968' stroke-width='4' stroke-linecap='round' stroke-dasharray='88 20' transform='rotate(120 32 32)'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --ground: #f4f1ec;
+      --surface: #fbfaf7;
+      --surface-2: #efeae1;
+      --border: #e4dfd3;
+      --border-strong: #d6cfbf;
+      --text: #2e2a25;
+      --muted: #7b7367;
+      --accent: #55655a;
+      --accent-soft: #6b7a6e;
+      --warm: #9a7357;
+      --warm-soft: #b08968;
+      --on-accent: #f6f4ee;
+      --shadow: 0 1px 2px rgba(46, 42, 37, 0.05);
+      --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --maxw: 44rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ground: #201d19;
+        --surface: #29241e;
+        --surface-2: #322c24;
+        --border: #3a342b;
+        --border-strong: #4a4335;
+        --text: #f1ece3;
+        --muted: #a89f90;
+        --accent: #9fb2a2;
+        --accent-soft: #8ea391;
+        --warm: #cb9d75;
+        --warm-soft: #b6875f;
+        --on-accent: #201d19;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--ground);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: clamp(1.5rem, 4vw, 3.5rem) 1.25rem 5rem;
+    }
+    .fade { animation: fade 0.6s ease both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .fade { animation: none; } }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0; }
+    a { color: var(--accent); }
+    .eyebrow {
+      font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 700; color: var(--warm);
+    }
+
+    header { text-align: center; padding: 1rem 0 2.5rem; }
+    .enso { width: 54px; height: 54px; margin: 0 auto 1.25rem; display: block; }
+    h1 { font-size: clamp(2.1rem, 6vw, 3rem); letter-spacing: -0.01em; }
+    .lede { color: var(--muted); max-width: 32rem; margin: 1rem auto 0; font-size: 1.08rem; }
+
+    section { margin-top: 2.75rem; }
+    .section-label {
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); font-weight: 700; margin-bottom: 1rem; padding-left: 0.15rem;
+    }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.25rem 1.35rem; box-shadow: var(--shadow);
+    }
+    .stack { display: flex; flex-direction: column; gap: 0.85rem; }
+    .item-head { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+    .item-head h3 { font-size: 1.25rem; }
+    .tag {
+      font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700;
+      color: var(--muted); border: 1px solid var(--border-strong); border-radius: 999px;
+      padding: 2px 9px;
+    }
+    .card p { margin: 0.5rem 0 0; color: var(--muted); }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font: inherit; font-weight: 600; text-decoration: none; cursor: pointer;
+      border-radius: 10px; padding: 0.55rem 1rem; border: 1px solid var(--border-strong);
+      background: var(--surface-2); color: var(--text);
+    }
+    .btn--primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .btn--primary:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+    .btn:focus-visible { outline: 2px solid var(--warm); outline-offset: 2px; }
+    .btn .arrow { font-size: 1.05em; line-height: 1; }
+
+    ol.road { list-style: none; counter-reset: step; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+    ol.road > li {
+      counter-increment: step;
+      display: grid; grid-template-columns: 2.6rem 1fr; gap: 0.9rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.05rem 1.15rem; box-shadow: var(--shadow);
+    }
+    ol.road > li::before {
+      content: counter(step);
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;
+      color: var(--warm); line-height: 1.1; font-variant-numeric: tabular-nums;
+    }
+    ol.road h3 { font-size: 1.12rem; margin-bottom: 0.15rem; }
+    ol.road p { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.98rem; }
+    code {
+      font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+      font-size: 0.85em; background: var(--surface-2); border: 1px solid var(--border);
+      padding: 0.12em 0.45em; border-radius: 6px; color: var(--text);
+    }
+    .prompt {
+      display: block; margin-top: 0.6rem; padding: 0.7rem 0.85rem;
+      background: var(--surface-2); border: 1px solid var(--border); border-left: 3px solid var(--warm-soft);
+      border-radius: 8px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.86rem; color: var(--text); line-height: 1.5; overflow-x: auto;
+    }
+    .lnk { color: var(--accent); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--border-strong); }
+    .lnk:hover { border-color: var(--accent); }
+
+    .notes { background: var(--surface-2); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem 1.35rem; }
+    .notes h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
+    .notes ul { margin: 0; padding-left: 1.1rem; color: var(--muted); }
+    .notes li { margin: 0.3rem 0; }
+    .notes li strong { color: var(--text); font-weight: 600; }
+
+    footer { margin-top: 3.5rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    footer .mark { font-family: var(--font-display); font-size: 1.05rem; color: var(--text); }
+    .divider { height: 1px; background: var(--border); margin: 0.6rem auto 0; max-width: 4rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap fade">
+    <header>
+      <svg class="enso" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="24" fill="none" stroke="var(--warm-soft)" stroke-width="4.5"
+                stroke-linecap="round" stroke-dasharray="132 28" transform="rotate(125 32 32)" />
+      </svg>
+      <p class="eyebrow">A handoff, and a head start</p>
+      <h1>Welcome, Will.</h1>
+      <p class="lede">
+        You've got a private-lesson studio app — built for you, clean, and yours to grow into.
+        Here's everything that was made, and an unhurried path to learning it yourself.
+      </p>
+    </header>
+
+    <section>
+      <div class="section-label">What you've got</div>
+      <div class="stack">
+        <div class="card">
+          <div class="item-head">
+            <h3>Tatami — your studio app</h3>
+            <span class="tag">Live · try it now</span>
+          </div>
+          <p>
+            Manage students, track their progress (belt history + a skills checklist), log lessons and
+            attendance, and record payments by cash, Venmo, or Zelle. It's loaded with example students
+            so you can play — reset it anytime under <strong>Settings → Reset to sample data</strong>.
+          </p>
+          <div class="actions">
+            <a class="btn btn--primary" href="https://jmarrale.github.io/my-gatsby-blog/studio/" target="_blank" rel="noopener">
+              Open the app <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="item-head">
+            <h3>An earlier look</h3>
+            <span class="tag">Live · for comparison</span>
+          </div>
+          <p>A darker first version, kept around only so you can see two directions side by side. The warm one above is the real one.</p>
+          <div class="actions">
+            <a class="btn" href="https://jmarrale.github.io/my-gatsby-blog/" target="_blank" rel="noopener">
+              Open the dark version <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="item-head">
+            <h3>A native iPhone app</h3>
+            <span class="tag">Code only</span>
+          </div>
+          <p>
+            A true iOS version (Apple's SwiftUI) also exists in the code. It has no web link by
+            nature — it only runs after being built on a Mac. For now, the app above installs to your
+            home screen and behaves like an app on any phone.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Where everything lives</div>
+      <div class="card">
+        <p style="color: var(--text); margin-top: 0;">
+          All the code and written guides sit in one place on GitHub. These open the exact folders:
+        </p>
+        <div class="actions">
+          <a class="btn" href="https://github.com/Jmarrale/my-gatsby-blog/tree/claude/jiu-jitsu-lesson-tracker-10qzyj/app" target="_blank" rel="noopener">The app code</a>
+          <a class="btn" href="https://github.com/Jmarrale/my-gatsby-blog/blob/claude/jiu-jitsu-lesson-tracker-10qzyj/app/START-HERE.md" target="_blank" rel="noopener">Start Here guide</a>
+          <a class="btn" href="https://github.com/Jmarrale/my-gatsby-blog/blob/claude/jiu-jitsu-lesson-tracker-10qzyj/app/docs/HANDOFF_CHECKLIST.md" target="_blank" rel="noopener">Go-Live Checklist</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Your roadmap — learn as you go</div>
+      <ol class="road">
+        <li>
+          <div>
+            <h3>Play with it</h3>
+            <p>Open the app and just use it: add a student, log a lesson, mark it completed, record a payment, open a student's Billing tab and print a statement. Break things freely — the reset button brings the samples back.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Get two accounts</h3>
+            <p>Install a password manager (<a class="lnk" href="https://bitwarden.com" target="_blank" rel="noopener">Bitwarden</a> is free) and create a <a class="lnk" href="https://github.com/signup" target="_blank" rel="noopener">GitHub account</a>. Save both logins in the password manager. That's the whole setup for now.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Meet Claude Code — your teacher</h3>
+            <p>Open <a class="lnk" href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, connect it to the project, and ask it to teach you. This is how you become technical — by asking, not studying. Start with:</p>
+            <code class="prompt">Explain what this project does and how the "app" folder is organized, like I'm brand new to coding.</code>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Read three short things</h3>
+            <p>Have Claude Code walk you through <code>app/START-HERE.md</code>, then <code>app/docs/OWNERS_GUIDE.md</code>, then the small, friendly file <code>app/src/lib/billing.ts</code> (the money math) with its test right beside it. Ask "what does this line do?" whenever you're curious.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Make your first tiny change</h3>
+            <p>A safe, satisfying first edit — rename the app. Ask Claude Code:</p>
+            <code class="prompt">In src/brand.ts, change the name to my studio's name, then show me the app with the change.</code>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Go live for real</h3>
+            <p>When you're ready for real students, follow the <strong>Go-Live Checklist</strong> — it sets up your private login and cloud storage so your data is saved and backed up. Do it with a hand from a techy friend, or ask Claude Code: <em>"Walk me through the handoff checklist one step at a time."</em></p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Put it on your phone</h3>
+            <p>Open the live app in Safari → <strong>Share</strong> → <strong>Add to Home Screen</strong>. Now it opens like any other app on your iPhone.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Grow it</h3>
+            <p>Once you're comfortable, dream bigger with Claude Code: lesson reminders, your own belt curriculum, charts of attendance and income — or building the real App Store version. You'll know enough to steer it.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <div class="notes">
+        <h3>A few honest notes</h3>
+        <ul>
+          <li><strong>Costs:</strong> hosting is free for one person. The cloud database is free too, but "sleeps" after about a week idle (loads slowly until it wakes) — a paid tier (~$25/mo) removes that, and it's optional.</li>
+          <li><strong>The iPhone App Store version</strong> would need a Mac and an Apple Developer account ($99/year). The home-screen app costs nothing.</li>
+          <li><strong>Changing the code</strong> takes a developer — or you, leveling up with Claude Code. That's the whole point: start by using it, end up owning it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <div class="mark">Tatami</div>
+      <div class="divider"></div>
+      <p>A private lesson studio, made just for you.</p>
+    </footer>
+  </div>
+</body>
+</html>
