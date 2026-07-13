@@ -1,0 +1,61 @@
+name: Deploy previews to GitHub Pages
+
+# Publishes to the gh-pages branch:
+#   /            -> the original vanilla-JS demo (static/lesson-tracker)
+#   /studio/     -> the new Tatami app (app/) built in sample-data mode
+# Both run entirely on in-browser sample data — no accounts, no secrets.
+
+on:
+  push:
+    branches:
+      - claude/jiu-jitsu-lesson-tracker-10qzyj
+      - main
+    paths:
+      - "static/lesson-tracker/**"
+      - "app/**"
+      - ".github/workflows/deploy-site.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Build the Tatami app (sample-data mode)
+        working-directory: app
+        run: |
+          npm ci
+          npm run build
+
+      - name: Assemble and publish to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          WORK="$(mktemp -d)"
+          cp -r static/lesson-tracker/. "$WORK"/
+          mkdir -p "$WORK/studio"
+          cp -r app/dist/. "$WORK/studio"/
+          touch "$WORK/.nojekyll"
+          cd "$WORK"
+          git init -q
+          git checkout -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Deploy demo + Tatami studio preview"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
