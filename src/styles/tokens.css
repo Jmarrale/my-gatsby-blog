@@ -1,0 +1,74 @@
+/* Japandi design tokens — warm minimalism.
+   Single source of truth for color, type, spacing, and form. */
+:root {
+  /* Palette */
+  --oat: #f4f1ec;
+  --sand: #e7e1d6;
+  --greige: #8a8072;
+  --sage: #6b7a6e;
+  --sage-deep: #55655a;
+  --clay: #b08968;
+  --clay-deep: #9a7357;
+  --ink: #2e2a25;
+
+  /* Semantic */
+  --bg: var(--oat);
+  --surface: #fbfaf7;
+  --surface-2: #f1ede5;
+  --border: #e2dccf;
+  --border-strong: #d3ccbc;
+  --text: var(--ink);
+  --muted: var(--greige);
+  --accent: var(--sage);
+  --accent-deep: var(--sage-deep);
+  --warm: var(--clay);
+  --warm-deep: var(--clay-deep);
+
+  /* Status (muted, on-brand) */
+  --ok: #6b7a6e;
+  --warn: #c08a3e;
+  --danger: #a85a4b;
+  --info: #6d7f8c;
+
+  /* Belt colors (the only saturated accents) */
+  --belt-white: #ece8e0;
+  --belt-blue: #2f5d8a;
+  --belt-purple: #6a4c93;
+  --belt-brown: #6b4a34;
+  --belt-black: #2b2b2f;
+
+  /* Typography */
+  --font-head: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --step--1: 0.833rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2.1rem;
+  --step-4: 2.75rem;
+  --leading: 1.55;
+  --tracking-tight: -0.01em;
+
+  /* Spacing — 4px base, 8pt rhythm */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.25rem;
+  --s-6: 1.5rem;
+  --s-8: 2rem;
+  --s-10: 2.5rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+
+  /* Form */
+  --radius: 14px;
+  --radius-sm: 9px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(46, 42, 37, 0.05);
+  --shadow: 0 2px 10px rgba(46, 42, 37, 0.06);
+  --ring: 0 0 0 3px rgba(107, 122, 110, 0.22);
+  --tabbar-h: 66px;
+  --content-max: 780px;
+}
